@@ -39,7 +39,38 @@ changelog:
       - '^docs:'
       - '^test:'
 
-# The lines beneath this are called `modelines`. See `:help modeline`
-# Feel free to remove those if you don't want/use them.
-# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
-# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+nfpms:
+-
+  package_name: lemonade
+  homepage: https://github.com/cnt0/lemonade
+  maintainer: cnt0 <foo@bar.com>
+  description: |-
+    Lemonade is a remote utility tool. 
+    (copy, paste and open browser) over TCP.
+  formats:
+    - apk
+    - deb
+    - rpm
+    - archlinux
+
+release:
+  github:
+    owner: cnt0
+    name: lemonade
+
+brews:
+- tap:
+    owner: cnt0
+    name: homebrew-tap
+  folder: Formula
+  homepage: https://github.com/cnt0/lemonade
+  description: |-
+    Lemonade is a remote utility tool. 
+    (copy, paste and open browser) over TCP.
+  install: |-
+    bin.install "lemonade"
+  service: |
+    run [bin/"lemonade", "server"]
+    keep_alive true
+    log_path var/"log/lemonade.log"
+    error_log_path var/"log/lemonade.log"
